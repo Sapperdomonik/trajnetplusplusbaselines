@@ -109,8 +109,12 @@ class Trainer(object):
                 scene_goal = np.array([[0, 0] for path in paths])
 
             ## Drop Distant
-            scene, mask = drop_distant(scene)
-            scene_goal = scene_goal[mask]
+            try:
+                scene, mask = drop_distant(scene)
+                scene_goal = scene_goal[mask]
+            except:
+                print(filename, scene_id)
+                sys.exit()
 
             ##process scene
             if self.normalize_scene:
@@ -186,8 +190,12 @@ class Trainer(object):
                 scene_goal = np.array([[0, 0] for path in paths])
 
             ## Drop Distant
-            scene, mask = drop_distant(scene)
-            scene_goal = scene_goal[mask]
+            try:
+                scene, mask = drop_distant(scene)
+                scene_goal = scene_goal[mask]
+            except:
+                print(filename, scene_id)
+                sys.exit()
 
             ##process scene
             if self.normalize_scene:
@@ -489,8 +497,8 @@ def main(epochs=50):
 
     # add args.device
     args.device = torch.device('cpu')
-    # if not args.disable_cuda and torch.cuda.is_available():
-    #     args.device = torch.device('cuda')
+    if not args.disable_cuda and torch.cuda.is_available():
+         args.device = torch.device('cuda')
 
     args.path = 'DATA_BLOCK/' + args.path
     ## Prepare data
