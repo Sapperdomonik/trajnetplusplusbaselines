@@ -12,7 +12,7 @@ from .utils import center_scene
 
 NAN = float('nan')
 
-def drop_distant(xy, r=100.0):
+def drop_distant(xy, r=50.0):
     """
     Drops pedestrians more than r meters away from primary ped
     """
